@@ -1,123 +1,83 @@
-import { useEffect, useRef } from 'react';
+// src/App.js
+import React, { useState } from 'react';
 import './App.css';
-import SimpleParallax from 'simple-parallax-js';
 
 function App() {
-  const parallaxRef = useRef(null);
-  const parallaxRef2 = useRef(null);
+  // Estado para los decks de ejemplo
+  const [decks, setDecks] = useState([
+    { id: 1, name: 'Vocabulario de Francés', cards: [{front: 'Bonjour', back: 'Hola'}, {front: 'Merci', back: 'Gracias'}] },
+    { id: 2, name: 'Anatomía Básica', cards: [{front: 'Hueso del muslo', back: 'Fémur'}, {front: 'Órgano que bombea sangre', back: 'Corazón'}] },
+  ]);
+  const [currentDeck, setCurrentDeck] = useState(null);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  useEffect(() => {
-    // Inicializar parallax en los elementos que quieras
-    if (parallaxRef.current) {
-      new SimpleParallax(parallaxRef.current, {
-        orientation: 'up',
-        scale: 1.2,
-        overflow: false,
-        delay: 0.6,
-        transition: 'cubic-bezier(0,0,0,1)'
-      });
-    }
-    
-    if (parallaxRef2.current) {
-      new SimpleParallax(parallaxRef2.current, {
-        orientation: 'down',
-        scale: 1.3,
-        overflow: false
-      });
-    }
-  }, []);
+  const handleStudy = (deck) => {
+    setCurrentDeck(deck);
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
+  };
 
+  const nextCard = () => {
+    if (currentDeck && currentCardIndex < currentDeck.cards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1);
+      setIsFlipped(false);
+    } else {
+      alert('¡Terminaste el deck!');
+      setCurrentDeck(null);
+    }
+  };
+
+  // Vista principal: Lista de Decks
+  if (!currentDeck) {
+    return (
+      <div className="App">
+        <header className="app-header">
+          <h1>📚 Mis FlashDecks</h1>
+          <p className="subtitle">Estudia con repetición espaciada</p>
+        </header>
+        <main className="container">
+          <div className="decks-grid">
+            {decks.map(deck => (
+              <div key={deck.id} className="deck-card">
+                <h3>{deck.name}</h3>
+                <p>{deck.cards.length} cartas</p>
+                <button className="btn-primary" onClick={() => handleStudy(deck)}>
+                  Estudiar →
+                </button>
+              </div>
+            ))}
+          </div>
+          <button className="btn-secondary">+ Crear Nuevo Deck</button>
+        </main>
+      </div>
+    );
+  }
+
+  // Vista de Estudio (cuando se selecciona un deck)
   return (
-    <div className="App">
-      {/* Header / Hero Section con parallax */}
-      <header className="hero">
-        <div className="container">
-          {/* Imagen con parallax (opcional) */}
-          <div className="parallax-bg" ref={parallaxRef}>
-            <div className="parallax-content">
-              <h1>📚 FlashCards Pro</h1>
-              <p className="subtitle">Aprende más rápido, estresa menos</p>
-              <p className="description">
-                Domina idiomas, prepara exámenes y retén información con nuestro 
-                método de <strong>repetición espaciada</strong>. Únete a más de 
-                <strong> 10,000 estudiantes</strong> que ya mejoraron sus resultados.
-              </p>
-              <button className="btn-primary" onClick={() => alert('🚀 Próximamente: Tienda de flashcards')}>
-                🛒 Comprar decks ahora
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="App study-view">
+      <header className="study-header">
+        <button className="btn-icon" onClick={() => setCurrentDeck(null)}>← Volver</button>
+        <h2>{currentDeck.name}</h2>
+        <p>Tarjeta {currentCardIndex + 1} de {currentDeck.cards.length}</p>
       </header>
-
-      {/* Features con parallax en las tarjetas */}
-      <section className="features">
-        <div className="container">
-          <h2 ref={parallaxRef2}>¿Por qué elegir FlashCards Pro?</h2>
-          <div className="features-grid">
-            <div className="card">
-              <span className="emoji">🎴</span>
-              <h3>Crea flashcards fácilmente</h3>
-              <p>Desde texto, imágenes o importa desde otros formatos.</p>
+      <main className="study-area">
+        <div className={`flashcard ${isFlipped ? 'flipped' : ''}`} onClick={() => setIsFlipped(!isFlipped)}>
+          <div className="flashcard-inner">
+            <div className="flashcard-front">
+              <p>{currentDeck.cards[currentCardIndex].front}</p>
+              <span className="hint">(toca para voltear)</span>
             </div>
-            <div className="card">
-              <span className="emoji">📦</span>
-              <h3>+50 decks prediseñados</h3>
-              <p>Inglés, medicina, programación, oposiciones y más.</p>
-            </div>
-            <div className="card">
-              <span className="emoji">🤝</span>
-              <h3>Comparte con amigos</h3>
-              <p>Estudia en grupo y compite por mejores puntuaciones.</p>
-            </div>
-            <div className="card">
-              <span className="emoji">⏱️</span>
-              <h3>Repetición espaciada</h3>
-              <p>Algoritmo inteligente que optimiza tu memoria.</p>
+            <div className="flashcard-back">
+              <p>{currentDeck.cards[currentCardIndex].back}</p>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Testimonios */}
-      <section className="testimonials">
-        <div className="container">
-          <h2>Lo que dicen nuestros clientes</h2>
-          <div className="testimonials-grid">
-            <div className="testimonial-card">
-              <p>"Aprobé el MIR gracias a los decks de medicina. ¡Repetí solo lo que necesitaba!"</p>
-              <span className="author">- Dra. Laura Gómez</span>
-            </div>
-            <div className="testimonial-card">
-              <p>"Aprendí 1000 palabras en inglés en 2 semanas. Mejor que Duolingo."</p>
-              <span className="author">- Carlos M., estudiante</span>
-            </div>
-            <div className="testimonial-card">
-              <p>"Como profesor, recomiendo FlashCards Pro a todos mis alumnos."</p>
-              <span className="author">- Javier Ruiz, profesor</span>
-            </div>
-          </div>
+        <div className="study-controls">
+          <button className="btn-secondary" onClick={nextCard}>Siguiente tarjeta →</button>
         </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="cta">
-        <div className="container">
-          <h2>¡Empieza a aprender hoy mismo!</h2>
-          <p>Pack básico: <strong>$9.99</strong> | Pack premium: <strong>$29.99</strong> (acceso vitalicio)</p>
-          <button className="btn-primary btn-large" onClick={() => alert('🔗 Redirigiendo a pasarela de pago')}>
-            💳 Comprar ahora
-          </button>
-          <p className="small">Oferta limitada: 30% de descuento con código FLASH30</p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer>
-        <div className="container">
-          <p>© 2026 FlashCards Pro - Tu método inteligente de estudio</p>
-        </div>
-      </footer>
+      </main>
     </div>
   );
 }
