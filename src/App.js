@@ -3,6 +3,20 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="container navbar-container">
+          <div className="logo">
+            <span className="logo-icon">📚</span>
+            <span className="logo-text">FlashCards Pro</span>
+          </div>
+          <div className="nav-buttons">
+            <button className="nav-btn-login">Iniciar sesión</button>
+            <button className="nav-btn-register">Registrarse</button>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="hero">
         <div className="container">
@@ -15,7 +29,7 @@ function App() {
             </p>
             <div className="hero-buttons">
               <button className="btn-primary btn-large">🚀 Comienza a aprender</button>
-              <button className="btn-secondary">📚 Más de 50,000 decks</button>
+              <button className="btn-secondary">📚 Decks Colaborativos</button>
             </div>
           </div>
         </div>
