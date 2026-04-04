@@ -1,9 +1,9 @@
-/* src/App.css - Con tus colores y estilos de flashcards */
 :root {
   --void-eclipse: #0B0B0B;
   --abyss-blue: #2B396D;
   --silver-mist: #E4E4E4;
   --abyss-light: #3a4a8a;
+  --abyss-dark: #1f294f;
 }
 
 * {
@@ -14,80 +14,73 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background-color: var(--void-eclipse);
+  background: var(--void-eclipse);
   color: var(--silver-mist);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 24px;
 }
 
-/* Header General */
-.app-header, .study-header {
-  text-align: center;
-  padding: 2rem;
+/* Hero Section */
+.hero {
+  padding: 80px 0;
   background: linear-gradient(135deg, var(--void-eclipse) 0%, var(--abyss-blue) 100%);
-  border-bottom: 1px solid rgba(228,228,228,0.1);
+  text-align: center;
+  border-bottom: 1px solid rgba(228, 228, 228, 0.1);
 }
 
-.app-header h1 {
-  font-size: 2.5rem;
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 24px;
   background: linear-gradient(135deg, var(--silver-mist) 0%, #a0a0a0 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Grid de Decks */
-.decks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  opacity: 0.9;
 }
 
-.deck-card {
-  background: rgba(43, 57, 109, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(228,228,228,0.1);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: transform 0.2s;
-}
-
-.deck-card:hover {
-  transform: translateY(-5px);
-  background: rgba(43, 57, 109, 0.25);
-  border-color: rgba(228,228,228,0.2);
-}
-
-.deck-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Botones */
 .btn-primary, .btn-secondary {
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2rem;
+  padding: 14px 32px;
+  border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 1rem;
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 1rem;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--abyss-blue) 0%, var(--abyss-light) 100%);
   color: var(--silver-mist);
-  border: 1px solid rgba(228,228,228,0.2);
+  border: 1px solid rgba(228, 228, 228, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(43,57,109,0.4);
+  box-shadow: 0 10px 25px rgba(43, 57, 109, 0.4);
 }
 
 .btn-secondary {
@@ -97,100 +90,206 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(228,228,228,0.1);
+  background: rgba(228, 228, 228, 0.1);
 }
 
-.btn-icon {
-  background: none;
-  border: none;
-  color: var(--silver-mist);
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
+.btn-large {
+  padding: 16px 40px;
+  font-size: 1.1rem;
 }
 
-/* Área de Estudio y Flashcard 3D */
-.study-view {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Features Section */
+.features {
+  padding: 80px 0;
+  background: var(--void-eclipse);
 }
 
-.study-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.study-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.flashcard {
-  background-color: transparent;
-  width: 100%;
-  max-width: 600px;
-  height: 350px;
-  perspective: 1000px;
-  cursor: pointer;
-  margin-bottom: 2rem;
-}
-
-.flashcard-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.section-title {
   text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 35px -10px rgba(0,0,0,0.5);
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: var(--silver-mist);
 }
 
-.flashcard.flipped .flashcard-inner {
-  transform: rotateY(180deg);
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
 }
 
-.flashcard-front, .flashcard-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  background: linear-gradient(145deg, var(--abyss-blue) 0%, var(--void-eclipse) 100%);
-  border: 1px solid rgba(228,228,228,0.2);
+.feature-card {
+  text-align: center;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(43, 57, 109, 0.1);
+  border: 1px solid rgba(228, 228, 228, 0.1);
+  transition: all 0.3s ease;
 }
 
-.flashcard-front p, .flashcard-back p {
-  font-size: 1.8rem;
-  font-weight: 500;
+.feature-card:hover {
+  transform: translateY(-5px);
+  background: rgba(43, 57, 109, 0.2);
+  border-color: rgba(228, 228, 228, 0.2);
 }
 
-.hint {
-  position: absolute;
-  bottom: 1.5rem;
-  font-size: 0.8rem;
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  opacity: 0.8;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.feature-link {
+  color: var(--silver-mist);
+  text-decoration: none;
+  font-weight: 600;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.feature-link:hover {
+  opacity: 1;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 80px 0;
+  background: linear-gradient(180deg, var(--void-eclipse) 0%, rgba(43, 57, 109, 0.1) 100%);
+}
+
+.testimonial-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(43, 57, 109, 0.05);
+  border: 1px solid rgba(228, 228, 228, 0.05);
+}
+
+.testimonial-badge {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--silver-mist);
+  padding: 10px;
+  border-left: 3px solid var(--abyss-blue);
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* Social Proof / Tweets */
+.social-proof {
+  padding: 80px 0;
+  background: var(--void-eclipse);
+}
+
+.tweets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.tweet-card {
+  background: rgba(43, 57, 109, 0.15);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(228, 228, 228, 0.1);
+  transition: all 0.3s ease;
+}
+
+.tweet-card:hover {
+  transform: translateY(-3px);
+  background: rgba(43, 57, 109, 0.25);
+}
+
+.tweet-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.tweet-author {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+/* CTA Section */
+.cta {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--abyss-blue) 0%, var(--void-eclipse) 100%);
+  text-align: center;
+  border-top: 1px solid rgba(228, 228, 228, 0.1);
+  border-bottom: 1px solid rgba(228, 228, 228, 0.1);
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.cta-small {
+  font-size: 0.9rem;
+  margin-top: 20px;
+  opacity: 0.7;
+}
+
+/* Footer */
+footer {
+  padding: 40px 0;
+  text-align: center;
   opacity: 0.6;
+  font-size: 0.9rem;
 }
 
-.flashcard-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(145deg, var(--void-eclipse) 0%, var(--abyss-blue) 100%);
-}
-
-.study-controls {
-  display: flex;
-  gap: 1rem;
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .testimonial-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    max-width: 280px;
+  }
 }
