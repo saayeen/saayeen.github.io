@@ -1,28 +1,59 @@
+import { useEffect, useRef } from 'react';
 import './App.css';
+import SimpleParallax from 'simple-parallax-js';
 
 function App() {
+  const parallaxRef = useRef(null);
+  const parallaxRef2 = useRef(null);
+
+  useEffect(() => {
+    // Inicializar parallax en los elementos que quieras
+    if (parallaxRef.current) {
+      new SimpleParallax(parallaxRef.current, {
+        orientation: 'up',
+        scale: 1.2,
+        overflow: false,
+        delay: 0.6,
+        transition: 'cubic-bezier(0,0,0,1)'
+      });
+    }
+    
+    if (parallaxRef2.current) {
+      new SimpleParallax(parallaxRef2.current, {
+        orientation: 'down',
+        scale: 1.3,
+        overflow: false
+      });
+    }
+  }, []);
+
   return (
     <div className="App">
-      {/* Header / Hero Section */}
+      {/* Header / Hero Section con parallax */}
       <header className="hero">
         <div className="container">
-          <h1>📚 FlashCards Pro</h1>
-          <p className="subtitle">Aprende más rápido, estresa menos</p>
-          <p className="description">
-            Domina idiomas, prepara exámenes y retén información con nuestro 
-            método de <strong>repetición espaciada</strong>. Únete a más de 
-            <strong> 10,000 estudiantes</strong> que ya mejoraron sus resultados.
-          </p>
-          <button className="btn-primary" onClick={() => alert('🚀 Próximamente: Tienda de flashcards')}>
-            🛒 Comprar decks ahora
-          </button>
+          {/* Imagen con parallax (opcional) */}
+          <div className="parallax-bg" ref={parallaxRef}>
+            <div className="parallax-content">
+              <h1>📚 FlashCards Pro</h1>
+              <p className="subtitle">Aprende más rápido, estresa menos</p>
+              <p className="description">
+                Domina idiomas, prepara exámenes y retén información con nuestro 
+                método de <strong>repetición espaciada</strong>. Únete a más de 
+                <strong> 10,000 estudiantes</strong> que ya mejoraron sus resultados.
+              </p>
+              <button className="btn-primary" onClick={() => alert('🚀 Próximamente: Tienda de flashcards')}>
+                🛒 Comprar decks ahora
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* Features - Características del producto */}
+      {/* Features con parallax en las tarjetas */}
       <section className="features">
         <div className="container">
-          <h2>¿Por qué elegir FlashCards Pro?</h2>
+          <h2 ref={parallaxRef2}>¿Por qué elegir FlashCards Pro?</h2>
           <div className="features-grid">
             <div className="card">
               <span className="emoji">🎴</span>
@@ -69,7 +100,7 @@ function App() {
         </div>
       </section>
 
-      {/* Call to Action - Sección de venta */}
+      {/* Call to Action */}
       <section className="cta">
         <div className="container">
           <h2>¡Empieza a aprender hoy mismo!</h2>
