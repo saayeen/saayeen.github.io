@@ -3,7 +3,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      {/* Hero Section - igual que Noji */}
+      {/* Hero Section */}
       <section className="hero">
         <div className="container">
           <div className="hero-content">
@@ -21,7 +21,7 @@ function App() {
         </div>
       </section>
 
-      {/* Features Section - Estudia inteligentemente */}
+      {/* Features Section */}
       <section className="features">
         <div className="container">
           <h2 className="section-title">Estudia inteligentemente con FlashCards Pro</h2>
@@ -53,8 +53,6 @@ function App() {
           </div>
         </div>
       </section>
-
-     
 
       {/* Footer */}
       <footer>
