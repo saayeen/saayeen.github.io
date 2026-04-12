@@ -10,8 +10,19 @@ body {
   overflow: hidden;
 }
 
+/* HERO IMAGE */
 .hero-image img {
   width: 400px;
   border-radius: 20px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* FEATURE HOVER */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }

@@ -2,6 +2,8 @@ import './App.css';
 import { useEffect } from "react";
 import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "./animations";
 
 function App() {
 
@@ -19,29 +21,55 @@ function App() {
   return (
     <div id="scroll-container" data-scroll-container>
 
-      {/* Hero Section */}
+      {/* HERO */}
       <section className="hero" data-scroll-section>
         <div className="container">
-          <div className="hero-content">
-            <h1 data-scroll data-scroll-speed="2">
-              FlashCards Pro :<br />Aprende Más, Estresa Menos
-            </h1>
 
-            <p 
+          {/* TEXTO */}
+          <motion.div
+            className="hero-content"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+          >
+            <motion.h1 variants={fadeUp} data-scroll data-scroll-speed="2">
+              FlashCards Pro :<br />Aprende Más, Estresa Menos
+            </motion.h1>
+
+            <motion.p 
+              variants={fadeUp}
               className="hero-description"
               data-scroll
               data-scroll-speed="1"
             >
-              Domina tus exámenes, aprende idiomas y mucho más...
-            </p>
+              Domina tus exámenes, aprende idiomas y mucho más, gracias a la repetición espaciada.
+            </motion.p>
 
-            <div className="hero-buttons" data-scroll data-scroll-speed="1">
-              <button className="btn-primary btn-large">🚀 Comienza a aprender</button>
-              <button className="btn-secondary">📚 Decks Colaborativos</button>
-            </div>
-          </div>
+            <motion.div 
+              variants={fadeUp}
+              className="hero-buttons"
+              data-scroll
+              data-scroll-speed="1"
+            >
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-primary btn-large"
+              >
+                🚀 Comienza a aprender
+              </motion.button>
 
-          {/* Imagen con parallax */}
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-secondary"
+              >
+                📚 Decks Colaborativos
+              </motion.button>
+            </motion.div>
+          </motion.div>
+
+          {/* IMAGEN */}
           <div className="hero-image">
             <img
               data-scroll
@@ -50,45 +78,55 @@ function App() {
               alt="hero"
             />
           </div>
+
         </div>
       </section>
 
-      {/* Features */}
+      {/* FEATURES */}
       <section className="features" data-scroll-section>
         <div className="container">
-          <h2 
-            className="section-title"
-            data-scroll
-            data-scroll-speed="1"
-          >
+
+          <h2 className="section-title">
             Estudia inteligentemente
           </h2>
 
-          <div className="features-grid">
-            <div className="feature-card" data-scroll data-scroll-speed="1">
+          <motion.div
+            className="features-grid"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+
+            <motion.div className="feature-card" variants={fadeUp}>
               <div className="feature-icon">🎴</div>
               <h3>Crea flashcards</h3>
-            </div>
+              <p>Personaliza tus cartas fácilmente.</p>
+            </motion.div>
 
-            <div className="feature-card" data-scroll data-scroll-speed="2">
+            <motion.div className="feature-card" variants={fadeUp}>
               <div className="feature-icon">📚</div>
               <h3>+50,000 decks</h3>
-            </div>
+              <p>Accede a contenido listo para estudiar.</p>
+            </motion.div>
 
-            <div className="feature-card" data-scroll data-scroll-speed="1">
+            <motion.div className="feature-card" variants={fadeUp}>
               <div className="feature-icon">👥</div>
               <h3>Comparte</h3>
-            </div>
+              <p>Estudia con amigos y colabora.</p>
+            </motion.div>
 
-            <div className="feature-card" data-scroll data-scroll-speed="2">
+            <motion.div className="feature-card" variants={fadeUp}>
               <div className="feature-icon">⏱️</div>
               <h3>Repetición espaciada</h3>
-            </div>
-          </div>
+              <p>Optimiza tu memoria a largo plazo.</p>
+            </motion.div>
+
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* FOOTER */}
       <footer data-scroll-section>
         <div className="container">
           <p>© 2026 FlashCards Pro</p>
