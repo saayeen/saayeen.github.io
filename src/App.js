@@ -1,138 +1,67 @@
 import './App.css';
-import { useEffect } from "react";
-import LocomotiveScroll from "locomotive-scroll";
-import "locomotive-scroll/dist/locomotive-scroll.css";
-import { motion } from "framer-motion";
-import { fadeUp, staggerContainer } from "./animations";
 
 function App() {
-
-  useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: document.querySelector("#scroll-container"),
-      smooth: true,
-      smartphone: { smooth: true },
-      tablet: { smooth: true }
-    });
-
-    return () => scroll.destroy();
-  }, []);
-
   return (
-    <div id="scroll-container" data-scroll-container>
+    <div className="App">
 
-      {/* HERO */}
-      <section className="hero" data-scroll-section>
+
+      {/* Hero Section */}
+      <section className="hero">
         <div className="container">
-
-          {/* TEXTO */}
-          <motion.div
-            className="hero-content"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="show"
-          >
-            <motion.h1 variants={fadeUp} data-scroll data-scroll-speed="2">
-              FlashCards Pro :<br />Aprende Más, Estresa Menos
-            </motion.h1>
-
-            <motion.p 
-              variants={fadeUp}
-              className="hero-description"
-              data-scroll
-              data-scroll-speed="1"
-            >
-              Domina tus exámenes, aprende idiomas y mucho más, gracias a la repetición espaciada.
-            </motion.p>
-
-            <motion.div 
-              variants={fadeUp}
-              className="hero-buttons"
-              data-scroll
-              data-scroll-speed="1"
-            >
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary btn-large"
-              >
-                🚀 Comienza a aprender
-              </motion.button>
-
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-secondary"
-              >
-                📚 Decks Colaborativos
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          {/* IMAGEN */}
-          <div className="hero-image">
-            <img
-              data-scroll
-              data-scroll-speed="-3"
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-              alt="hero"
-            />
+          <div className="hero-content">
+            <h1>FlashCards Pro :<br />Aprende Más, Estresa Menos</h1>
+            <p className="hero-description">
+              Domina tus exámenes, aprende idiomas y mucho más, gracias a la magia de la 
+              repetición espaciada, respaldada por la ciencia. 
+              Únete a nuestra comunidad de más de <strong>10,000 estudiantes</strong>.
+            </p>
+            <div className="hero-buttons">
+              <button className="btn-primary btn-large">🚀 Comienza a aprender</button>
+              <button className="btn-secondary">📚 Decks Colaborativos</button>
+            </div>
           </div>
-
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="features" data-scroll-section>
+      {/* Features Section */}
+      <section className="features">
         <div className="container">
-
-          <h2 className="section-title">
-            Estudia inteligentemente
-          </h2>
-
-          <motion.div
-            className="features-grid"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-
-            <motion.div className="feature-card" variants={fadeUp}>
+          <h2 className="section-title">Estudia inteligentemente con FlashCards Pro</h2>
+          <div className="features-grid">
+            <div className="feature-card">
               <div className="feature-icon">🎴</div>
-              <h3>Crea flashcards</h3>
-              <p>Personaliza tus cartas fácilmente.</p>
-            </motion.div>
-
-            <motion.div className="feature-card" variants={fadeUp}>
+              <h3>Crea flashcards como quieras</h3>
+              <p>Crea cartas desde texto, imágenes o importa desde otros formatos.</p>
+              <a href="#" className="feature-link">Crear flashcards →</a>
+            </div>
+            <div className="feature-card">
               <div className="feature-icon">📚</div>
-              <h3>+50,000 decks</h3>
-              <p>Accede a contenido listo para estudiar.</p>
-            </motion.div>
-
-            <motion.div className="feature-card" variants={fadeUp}>
+              <h3>Elige entre +50,000 decks</h3>
+              <p>Encuentra decks prediseñados de cualquier tema o materia.</p>
+              <a href="#" className="feature-link">Explorar decks →</a>
+            </div>
+            <div className="feature-card">
               <div className="feature-icon">👥</div>
-              <h3>Comparte</h3>
-              <p>Estudia con amigos y colabora.</p>
-            </motion.div>
-
-            <motion.div className="feature-card" variants={fadeUp}>
+              <h3>Crea y comparte con amigos</h3>
+              <p>Estudia en grupo, compite y comparte tus mejores decks.</p>
+              <a href="#" className="feature-link">Crear y compartir →</a>
+            </div>
+            <div className="feature-card">
               <div className="feature-icon">⏱️</div>
-              <h3>Repetición espaciada</h3>
-              <p>Optimiza tu memoria a largo plazo.</p>
-            </motion.div>
-
-          </motion.div>
+              <h3>Aprende con repetición espaciada</h3>
+              <p>Algoritmo inteligente que optimiza tu memoria a largo plazo.</p>
+              <a href="#" className="feature-link">Aprende más →</a>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer data-scroll-section>
+      {/* Footer */}
+      <footer>
         <div className="container">
-          <p>© 2026 FlashCards Pro</p>
+          <p>© 2026 FlashCards Pro - Tu método inteligente de estudio</p>
         </div>
       </footer>
-
     </div>
   );
 }
